@@ -59,7 +59,7 @@ If you are new to the field, start with design before software:
 | We only have observational data and treatment was not randomized. | DAGs, matching, weighting, target trial emulation, sensitivity analysis. | [Causal Inference: What If](https://miguelhernan.org/whatifbook), [DAGitty](https://www.dagitty.net/), [MatchIt](https://kosukeimai.github.io/MatchIt/), [WeightIt](https://ngreifer.github.io/WeightIt/), [sensemakr](https://github.com/carloscinelli/sensemakr) |
 | We expect effects to vary by user, patient, context, or market. | CATE, uplift modeling, causal forests, policy learning. | [EconML](https://econml.azurewebsites.net/), [CausalML](https://causalml.readthedocs.io/), [grf](https://grf-labs.github.io/grf/), [DoubleML](https://docs.doubleml.org/stable/index.html) |
 | We have time series around an intervention. | Interrupted time series, Bayesian structural time series, synthetic control, causal time-series discovery. | [CausalImpact](https://google.github.io/CausalImpact/CausalImpact.html), [Synth](https://cran.r-project.org/package=Synth), [synthdid](https://synth-inference.github.io/synthdid/), [Tigramite](https://jakobrunge.github.io/tigramite/) |
-| We want to discover candidate causal structure. | Causal discovery, invariance, graphical model search, time-series causal discovery. | [Elements of Causal Inference](https://mitpress.mit.edu/9780262037310/elements-of-causal-inference/), [Tetrad](https://www.cmu.edu/dietrich/causality/tetrad/), [causal-learn](https://causal-learn.readthedocs.io/en/latest/index.html), [Tigramite](https://jakobrunge.github.io/tigramite/) |
+| We want to discover candidate causal structure. | Causal discovery, invariance, graphical model search, time-series causal discovery. | [Elements of Causal Inference](https://is.mpg.de/ics/en/publications/petjansch17), [Tetrad](https://www.cmu.edu/dietrich/philosophy/tetrad/), [causal-learn](https://causal-learn.readthedocs.io/en/latest/index.html), [Tigramite](https://jakobrunge.github.io/tigramite/) |
 
 Design labels are not guarantees. They are starting points for asking whether the assignment mechanism, comparison group, timing, measurements, and assumptions can support the causal claim.
 
@@ -83,7 +83,7 @@ Design labels are not guarantees. They are starting points for asking whether th
 - [The Effect](https://theeffectbook.net/) - Nick Huntington-Klein's accessible research-design-first book with code examples and a strong emphasis on identification.
 - [Causal Inference for the Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page) - Python-first online book with practical examples across experiments, matching, DiD, RDD, synthetic controls, and causal ML.
 - [Introduction to Causal Inference from a Machine Learning Perspective](https://www.bradyneal.com/causal-inference-course) - Brady Neal's course text and lectures bridging graphical models, potential outcomes, and ML.
-- [Elements of Causal Inference](https://mitpress.mit.edu/9780262037310/elements-of-causal-inference/) - Peters, Janzing, and Scholkopf on causal discovery, invariance, and structural causal models.
+- [Elements of Causal Inference](https://is.mpg.de/ics/en/publications/petjansch17) - Peters, Janzing, and Scholkopf on causal discovery, invariance, and structural causal models.
 - [Design of Observational Studies](https://link.springer.com/book/10.1007/978-1-4419-1213-8) - Rosenbaum's design-centered treatment of observational studies and sensitivity analysis.
 - [Field Experiments](https://wwnorton.com/books/Field-Experiments/) - Gerber and Green on designing and analyzing randomized field experiments.
 - [Mostly Harmless Econometrics](https://press.princeton.edu/books/paperback/9780691120355/mostly-harmless-econometrics) - A classic design-based econometrics reference.
@@ -103,8 +103,8 @@ Design labels are not guarantees. They are starting points for asking whether th
 
 - [DAGitty](https://www.dagitty.net/) - Browser-based tool and R package for drawing and analyzing causal DAGs and adjustment sets.
 - [DoWhy](https://www.pywhy.org/dowhy/) - Python library organized around model, identify, estimate, and refute.
-- [pgmpy causal inference](https://pgmpy.org/exact_infer/causal.html) - Causal queries, adjustment sets, and do-operator support for graphical models in Python.
-- [Tetrad](https://www.cmu.edu/dietrich/causality/tetrad/) - CMU project for graphical causal modeling and causal discovery.
+- [pgmpy](https://pgmpy.org/) - Causal queries, adjustment sets, and do-operator support for graphical models in Python.
+- [Tetrad](https://www.cmu.edu/dietrich/philosophy/tetrad/) - CMU project for graphical causal modeling and causal discovery.
 - [Single World Intervention Graphs: A Primer](https://arxiv.org/abs/1301.3908) - Richardson and Robins on SWIGs for counterfactual causal models.
 - [A Crash Course in Good and Bad Controls](https://ftp.iza.org/dp13659.pdf) - Cinelli, Forney, and Pearl on when controls help, hurt, or change the estimand.
 
@@ -115,7 +115,7 @@ Design labels are not guarantees. They are starting points for asking whether th
 - [Controlled experiments on the web: survey and practical guide](https://link.springer.com/article/10.1007/s10618-008-0114-1) - Open-access survey on web experiments, common pitfalls, and practical design.
 - [Online Experimentation at Microsoft](https://www.microsoft.com/en-us/research/?p=696748) - Lessons from Microsoft's experimentation platform and culture.
 - [GrowthBook](https://docs.growthbook.io/) - Open-source feature flagging and experimentation platform.
-- [PlanOut](https://facebook.github.io/planout/) - Framework for parameterized experiments and random assignment logic.
+- [PlanOut](https://github.com/facebookarchive/planout) - Archived framework for parameterized experiments and deterministic random assignment logic.
 - [Ax](https://ax.dev/) - Adaptive experimentation and Bayesian optimization platform.
 - [DeclareDesign](https://declaredesign.org/r/declaredesign/) - R framework for declaring, simulating, and diagnosing research designs before implementation.
 - [randomizr](https://declaredesign.org/r/randomizr/) - R package for random assignment procedures.
@@ -149,7 +149,7 @@ Design labels are not guarantees. They are starting points for asking whether th
 - [EValue](https://cran.r-project.org/package=EValue) - R package for E-values and sensitivity analysis for unmeasured confounding.
 - [DoWhy refuters](https://www.pywhy.org/dowhy/v0.14/user_guide/refuting_causal_estimates/index.html) - Refutation tests such as placebo treatments, random common causes, and data subsets.
 - [EconML sensitivity tools](https://www.pywhy.org/EconML/spec/estimation/dml.html#sensitivity-analysis) - Sensitivity summaries and robustness values for selected orthogonal ML estimators.
-- [Making Sense of Sensitivity](https://academic.oup.com/jrsssb/article/82/1/39/7056082) - Cinelli and Hazlett on omitted variable bias sensitivity analysis.
+- [Making Sense of Sensitivity](https://escholarship.org/uc/item/0pg6471b) - Cinelli and Hazlett on omitted variable bias sensitivity analysis.
 - [A/A tests and sample ratio mismatch](https://exp-platform.com/) - Practical experimentation diagnostics collected by the ExP platform.
 
 ## Causal Discovery and Time Series
@@ -198,7 +198,7 @@ Design labels are not guarantees. They are starting points for asking whether th
 
 - [ACIC Data Challenge](https://acic2026datachallenge.github.io/) - Semi-synthetic and benchmark data challenges for causal inference methods.
 - [CMU causal-learn benchmarks](https://www.cmu.edu/dietrich/causality/causal-learn/) - Benchmark datasets for causal discovery.
-- [CauseMe](https://causeme.uv.es/) - Platform for benchmarking causal discovery from time-series data.
+- [CausalRivers](https://causalrivers.github.io/) - Real-world river-discharge benchmark for time-series causal discovery.
 - [LaLonde / National Supported Work data](https://users.nber.org/~rdehejia/nswdata.html) - Classic benchmark data for program evaluation and matching.
 - [IHDP benchmark](https://www.fredjo.com/) - Common semi-synthetic benchmark for treatment effect estimation.
 
