@@ -3,10 +3,13 @@
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Link Check](https://github.com/WilliamWJHuang/awesome-causal-inference/actions/workflows/link-check.yml/badge.svg)](https://github.com/WilliamWJHuang/awesome-causal-inference/actions/workflows/link-check.yml)
+[![Awesome Lint](https://github.com/WilliamWJHuang/awesome-causal-inference/actions/workflows/awesome-lint.yml/badge.svg)](https://github.com/WilliamWJHuang/awesome-causal-inference/actions/workflows/awesome-lint.yml)
 
 A curated list of practical, research-grade resources for causal inference, experimentation, quasi-experiments, uplift modeling, causal machine learning, and decision-making from data.
 
 Causal inference is not a menu of estimators. The best resources here help you define the estimand, state assumptions, defend identification, run or analyze experiments, test robustness, and communicate uncertainty.
+
+<!--lint disable awesome-list-item-->
 
 ## Scope
 
@@ -24,7 +27,9 @@ This repository deliberately emphasizes experimentation and applied decision-mak
 
 - [Start Here](#start-here)
 - [Causal Questions by Design](#causal-questions-by-design)
+- [How to Judge a Causal Claim](#how-to-judge-a-causal-claim)
 - [Common Failure Modes](#common-failure-modes)
+- [Methods Are Not Magic](#methods-are-not-magic)
 - [Foundations and Books](#foundations-and-books)
 - [Courses and Lecture Notes](#courses-and-lecture-notes)
 - [Causal Diagrams and Identification](#causal-diagrams-and-identification)
@@ -38,6 +43,7 @@ This repository deliberately emphasizes experimentation and applied decision-mak
 - [Datasets and Benchmarks](#datasets-and-benchmarks)
 - [Industry Case Studies](#industry-case-studies)
 - [Communities and Related Lists](#communities-and-related-lists)
+- [Not Included Yet](#not-included-yet)
 - [Curation Checklist](#curation-checklist)
 
 ## Start Here
@@ -63,6 +69,21 @@ If you are new to the field, start with design before software:
 
 Design labels are not guarantees. They are starting points for asking whether the assignment mechanism, comparison group, timing, measurements, and assumptions can support the causal claim.
 
+## How to Judge a Causal Claim
+
+Before trusting a causal estimate, ask:
+
+- What is the intervention, treatment, exposure, or policy being evaluated?
+- What is the estimand: ATE, ATT, CATE, LATE, local effect near a cutoff, or something else?
+- What is the assignment mechanism, and was it randomized, as-if randomized, thresholded, rolled out, self-selected, or inferred?
+- What comparison identifies the missing counterfactual?
+- Which assumptions are necessary for identification?
+- Which covariates are pre-treatment, and which could be mediators, colliders, or consequences of treatment?
+- What diagnostics, placebo tests, balance checks, pre-trend checks, manipulation checks, sensitivity analyses, or refuters were run?
+- What would make the claim fail?
+- Are the uncertainty intervals, multiple-testing choices, and stopping rules consistent with the analysis plan?
+- Does the result generalize beyond the studied units, time period, market, or exposure pattern?
+
 ## Common Failure Modes
 
 - **Bad controls:** adjusting for colliders, mediators, instruments, or post-treatment variables can create bias or change the estimand.
@@ -75,6 +96,20 @@ Design labels are not guarantees. They are starting points for asking whether th
 - **Metric validity problems:** the measured metric is not the decision-relevant outcome, or it can be gamed by the intervention.
 - **Positivity violations:** some units have no realistic chance of receiving each treatment condition, making comparisons extrapolative.
 - **Heterogeneous effects hidden by averages:** a positive average treatment effect may mask harmed subgroups or operationally important variation.
+
+## Methods Are Not Magic
+
+- **Matching:** improves observed covariate balance; it does not fix unmeasured confounding, bad overlap, or post-treatment adjustment.
+- **Weighting:** targets a specific population; extreme weights often signal weak overlap or unstable extrapolation.
+- **Difference-in-differences:** needs a credible untreated counterfactual trend; staggered timing and heterogeneous effects require care.
+- **Instrumental variables:** require relevance, exclusion, independence, and usually monotonicity; weak instruments can be worse than no instrument.
+- **Regression discontinuity:** estimates a local effect near the cutoff; bandwidth choice and manipulation around the threshold matter.
+- **Synthetic control:** depends on donor-pool quality, pre-treatment fit, and no spillovers from treated to control units.
+- **Causal forests and CATE models:** estimate heterogeneity after a causal design is credible; they do not create identification by themselves.
+- **Double/debiased ML:** helps with nuisance estimation under assumptions; it does not rescue a poorly defined estimand or confounded assignment.
+- **CUPED and covariate adjustment:** can reduce variance in randomized experiments when covariates are pre-treatment and predictive; post-treatment covariates can bias the result.
+
+<!--lint enable awesome-list-item-->
 
 ## Foundations and Books
 
@@ -112,6 +147,8 @@ Design labels are not guarantees. They are starting points for asking whether th
 
 - [Trustworthy Online Controlled Experiments](https://experimentguide.com/) - Kohavi, Tang, and Xu's practical guide to A/B testing, metrics, trustworthiness checks, and experimentation platforms.
 - [ExP Platform](https://exp-platform.com/) - Papers and resources from Ronny Kohavi and collaborators on online controlled experiments at scale.
+- [CUPED](https://exp-platform.com/cuped/) - Deng, Xu, Kohavi, and Walker paper on using pre-experiment data to reduce variance in online controlled experiments.
+- [Leveraging covariate adjustments at scale in online A/B testing](https://proceedings.mlr.press/v218/masoero23a.html) - Masoero, Hains, and McQueen on scalable covariate adjustment for online experiments.
 - [Controlled experiments on the web: survey and practical guide](https://link.springer.com/article/10.1007/s10618-008-0114-1) - Open-access survey on web experiments, common pitfalls, and practical design.
 - [Online Experimentation at Microsoft](https://www.microsoft.com/en-us/research/?p=696748) - Lessons from Microsoft's experimentation platform and culture.
 - [GrowthBook](https://docs.growthbook.io/) - Open-source feature flagging and experimentation platform.
@@ -219,6 +256,24 @@ Benchmarks are useful for debugging and comparison, not proof that a method iden
 - [Stanford Causal Science Center](https://datascience.stanford.edu/causal) - Seminars, workshops, and interdisciplinary causal inference resources.
 - [Online Causal Inference Seminar](https://datascience.stanford.edu/causal/online-causal-inference-seminars) - Seminar series and recordings from researchers across causal inference.
 - [awesome-causal-inference](https://github.com/matteocourthoud/awesome-causal-inference) - Broad existing awesome list of causal inference resources.
+
+<!--lint disable awesome-list-item-->
+
+## Not Included Yet
+
+These are good contribution targets. They are intentionally listed as gaps, not as endorsed resources:
+
+- CUPAC and newer variance-reduction extensions beyond CUPED.
+- Sequential testing, always-valid inference, alpha spending, and experiment monitoring.
+- Cluster randomized trials and split-plot experiments.
+- Interference, network experiments, marketplace experiments, and spillover-aware designs.
+- Encouragement designs and randomized instruments.
+- Missing data, attrition, censoring, and survivorship problems.
+- Causal inference for recommender systems, ranking, ads, and ML product loops.
+- More healthcare, education, labor, and policy case studies.
+- Reviewer-friendly starter paths for product analysts, economists, ML researchers, and epidemiologists.
+
+See [ROADMAP.md](ROADMAP.md) for the working backlog.
 
 ## Curation Checklist
 
