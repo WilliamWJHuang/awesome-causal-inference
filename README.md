@@ -26,6 +26,7 @@ This repository deliberately emphasizes experimentation and applied decision-mak
 ## Contents
 
 - [Start Here](#start-here)
+- [Starter Paths](#starter-paths)
 - [Causal Questions by Design](#causal-questions-by-design)
 - [How to Judge a Causal Claim](#how-to-judge-a-causal-claim)
 - [Common Failure Modes](#common-failure-modes)
@@ -34,16 +35,21 @@ This repository deliberately emphasizes experimentation and applied decision-mak
 - [Courses and Lecture Notes](#courses-and-lecture-notes)
 - [Causal Diagrams and Identification](#causal-diagrams-and-identification)
 - [Randomized Experiments and A/B Testing](#randomized-experiments-and-ab-testing)
+- [Variance Reduction and Sequential Testing](#variance-reduction-and-sequential-testing)
+- [Cluster, Network, and Marketplace Experiments](#cluster-network-and-marketplace-experiments)
 - [Quasi-Experiments and Observational Designs](#quasi-experiments-and-observational-designs)
+- [Instrumental Variables and Encouragement Designs](#instrumental-variables-and-encouragement-designs)
+- [Missing Data, Attrition, and Censoring](#missing-data-attrition-and-censoring)
 - [Heterogeneous Effects, Uplift, and Policy Learning](#heterogeneous-effects-uplift-and-policy-learning)
+- [Recommender Systems, Ads, and ML Product Loops](#recommender-systems-ads-and-ml-product-loops)
 - [Sensitivity, Robustness, and Diagnostics](#sensitivity-robustness-and-diagnostics)
 - [Causal Discovery and Time Series](#causal-discovery-and-time-series)
 - [Python Libraries](#python-libraries)
 - [R Libraries](#r-libraries)
 - [Datasets and Benchmarks](#datasets-and-benchmarks)
 - [Industry Case Studies](#industry-case-studies)
+- [Healthcare and Policy Case Studies](#healthcare-and-policy-case-studies)
 - [Communities and Related Lists](#communities-and-related-lists)
-- [Not Included Yet](#not-included-yet)
 - [Curation Checklist](#curation-checklist)
 
 ## Start Here
@@ -55,6 +61,14 @@ If you are new to the field, start with design before software:
 - **Observational product or policy analysis:** [Causal Inference: The Mixtape](https://mixtape.scunning.com/), [MatchIt](https://kosukeimai.github.io/MatchIt/), [WeightIt](https://ngreifer.github.io/WeightIt/), [cobalt](https://ngreifer.github.io/cobalt/), and [did](https://bcallaway11.github.io/did/).
 - **Causal machine learning:** [DoWhy](https://www.pywhy.org/dowhy/), [EconML](https://econml.azurewebsites.net/), [DoubleML](https://docs.doubleml.org/stable/index.html), and [grf](https://grf-labs.github.io/grf/).
 - **Robustness and critique:** [A Crash Course in Good and Bad Controls](https://ftp.iza.org/dp13659.pdf), [sensemakr](https://github.com/carloscinelli/sensemakr), and [DoWhy refuters](https://www.pywhy.org/dowhy/v0.14/user_guide/refuting_causal_estimates/index.html).
+
+## Starter Paths
+
+- **Product analysts:** start with online experimentation, variance reduction, sample ratio mismatch, guardrail metrics, and the failure modes around peeking, exposure, and interference.
+- **Economists and policy researchers:** start with design-based quasi-experiments, IV, DiD, RDD, synthetic control, and sensitivity analysis.
+- **ML researchers:** start with identification, CATE, off-policy evaluation, recommendation-as-treatment, and the distinction between predictive performance and causal validity.
+- **Epidemiologists and healthcare researchers:** start with target trials, longitudinal causal inference, missing data, censoring, positivity, and sensitivity analysis.
+- **Experiment platform builders:** start with assignment, logging, metric validity, CUPED/CUPAC-style variance reduction, sequential monitoring, and review processes.
 
 ## Causal Questions by Design
 
@@ -147,8 +161,6 @@ Before trusting a causal estimate, ask:
 
 - [Trustworthy Online Controlled Experiments](https://experimentguide.com/) - Kohavi, Tang, and Xu's practical guide to A/B testing, metrics, trustworthiness checks, and experimentation platforms.
 - [ExP Platform](https://exp-platform.com/) - Papers and resources from Ronny Kohavi and collaborators on online controlled experiments at scale.
-- [CUPED](https://exp-platform.com/cuped/) - Deng, Xu, Kohavi, and Walker paper on using pre-experiment data to reduce variance in online controlled experiments.
-- [Leveraging covariate adjustments at scale in online A/B testing](https://proceedings.mlr.press/v218/masoero23a.html) - Masoero, Hains, and McQueen on scalable covariate adjustment for online experiments.
 - [Controlled experiments on the web: survey and practical guide](https://link.springer.com/article/10.1007/s10618-008-0114-1) - Open-access survey on web experiments, common pitfalls, and practical design.
 - [Online Experimentation at Microsoft](https://www.microsoft.com/en-us/research/?p=696748) - Lessons from Microsoft's experimentation platform and culture.
 - [GrowthBook](https://docs.growthbook.io/) - Open-source feature flagging and experimentation platform.
@@ -157,6 +169,24 @@ Before trusting a causal estimate, ask:
 - [DeclareDesign](https://declaredesign.org/r/declaredesign/) - R framework for declaring, simulating, and diagnosing research designs before implementation.
 - [randomizr](https://declaredesign.org/r/randomizr/) - R package for random assignment procedures.
 - [estimatr](https://declaredesign.org/r/estimatr/) - R package for design-based estimators with robust and clustered standard errors.
+
+## Variance Reduction and Sequential Testing
+
+- [CUPED](https://exp-platform.com/cuped/) - Deng, Xu, Kohavi, and Walker paper on using pre-experiment data to reduce variance in online controlled experiments.
+- [Deep Dive Into Variance Reduction](https://www.microsoft.com/en-us/research/articles/deep-dive-into-variance-reduction/) - Microsoft ExP article on what variance reduction does and does not change in A/B testing.
+- [Leveraging covariate adjustments at scale in online A/B testing](https://proceedings.mlr.press/v218/masoero23a.html) - Masoero, Hains, and McQueen on scalable covariate adjustment for online experiments.
+- [Improving Experimental Power through CUPAC](https://careersatdoordash.com/blog/improving-experimental-power-through-control-using-predictions-as-covariate-cupac/) - DoorDash article on using ML predictions as covariates in switchback and online experiments.
+- [Meet Dash-AB](https://careersatdoordash.com/blog/meet-dash-ab-the-statistics-engine-of-experimentation-at-doordash/) - DoorDash's experimentation statistics engine, including CUPED, CUPAC, fixed-horizon tests, and sequential tests.
+- [Always Valid Inference: Bringing Sequential Analysis to A/B Testing](https://arxiv.org/abs/1512.04922) - Johari, Pekelis, and Walsh on continuous monitoring and always-valid p-values for A/B tests.
+- [Online multiple hypothesis testing](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615519/) - Survey of online false discovery rate control and sequential testing ideas.
+- [Covariate adjustment and CUPED methodology](https://launchdarkly.com/docs/guides/statistical-methodology/cuped) - Practical documentation on CUPED, ANCOVA-style adjustment, pre-treatment covariates, and implementation caveats.
+
+## Cluster, Network, and Marketplace Experiments
+
+- [Toward Causal Inference in Cluster Randomized Trials](https://prevention.nih.gov/education-training/methods-mind-gap/toward-causal-inference-cluster-randomized-trials-estimands-and-reflection-current-practice) - NIH webinar on estimands and practice in cluster randomized trials.
+- [Network experiment designs for inferring causal effects under interference](https://www.frontiersin.org/journals/big-data/articles/10.3389/fdata.2023.1128649/full) - Designs for direct and total effects when treatment spills over across network edges.
+- [Interference, Bias, and Variance in Two-Sided Marketplace Experimentation](https://www.gsb.stanford.edu/faculty-research/working-papers/interference-bias-variance-two-sided-marketplace-experimentation) - Practitioner-oriented paper on marketplace experiment bias and variance tradeoffs.
+- [Causal Inference in the Presence of Interference in Sponsored Search Advertising](https://www.frontiersin.org/journals/big-data/articles/10.3389/fdata.2022.888592/full) - Advertising example where the outcome for one unit depends on other units' placements.
 
 ## Quasi-Experiments and Observational Designs
 
@@ -170,6 +200,19 @@ Before trusting a causal estimate, ask:
 - [WeightIt](https://ngreifer.github.io/WeightIt/) - R package for balancing weights across binary, multi-category, continuous, and longitudinal treatments.
 - [cobalt](https://ngreifer.github.io/cobalt/) - Covariate balance diagnostics and Love plots for matching and weighting workflows.
 
+## Instrumental Variables and Encouragement Designs
+
+- [Identification of Causal Effects Using Instrumental Variables](https://www.nber.org/papers/t0136) - Angrist, Imbens, and Rubin paper on IV identification and local average treatment effects.
+- [Tutorial in Biostatistics: Instrumental Variable Methods for Causal Inference](https://pmc.ncbi.nlm.nih.gov/articles/PMC4201653/) - Applied tutorial covering IV assumptions, estimation, sensitivity analysis, and randomized encouragement trials.
+- [Causal Inference With Instrumental Variables](https://prevention.nih.gov/education-training/methods-mind-gap/causal-inference-instrumental-variables) - NIH webinar on LATE/CACE-style instrumental-variable reasoning.
+- [Quasi-Experimental Designs for Causal Inference](https://pmc.ncbi.nlm.nih.gov/articles/PMC6086368/) - Overview of quasi-experimental designs, including IV and encouragement designs.
+
+## Missing Data, Attrition, and Censoring
+
+- [Addressing missing data in randomized clinical trials](https://journals.plos.org/plosone/doi?id=10.1371/journal.pone.0234349) - Causal-inference perspective on MCAR, MAR, MNAR, selective attrition, and Lee-bound-style approaches.
+- [Causal Inference With Outcome-Dependent Missingness And Self-Censoring](https://pmc.ncbi.nlm.nih.gov/articles/PMC11905187/) - Work on causal identification when missingness depends on outcomes or self-censoring.
+- [Causal Inference with Corrupted Data](https://www.nber.org/books-and-chapters/data-privacy-protection-and-conduct-applied-research-methods-approaches-and-their-consequences/causal-inference-corrupted-data-measurement-error-missing-values-discretization-and-differential) - NBER chapter on measurement error, missing values, discretization, and privacy transformations.
+
 ## Heterogeneous Effects, Uplift, and Policy Learning
 
 - [EconML](https://econml.azurewebsites.net/) - Python library from Microsoft Research for CATE estimation, orthogonal ML, causal forests, IV methods, and policy interpretation.
@@ -179,6 +222,15 @@ Before trusting a causal estimate, ask:
 - [Meta-learners for Estimating Heterogeneous Treatment Effects](https://arxiv.org/abs/1706.03461) - Kunzel et al. paper on S-, T-, X-, and related learners.
 - [Generalized Random Forests](https://projecteuclid.org/journals/annals-of-statistics/volume-47/issue-2/Generalized-random-forests/10.1214/18-AOS1709.full) - Athey, Tibshirani, and Wager paper underlying GRF methods.
 - [Policy Learning with Observational Data](https://arxiv.org/abs/1702.02896) - Athey and Wager on learning treatment assignment policies.
+
+## Recommender Systems, Ads, and ML Product Loops
+
+- [Tutorial on Causal Inference and Counterfactual Reasoning](https://www.microsoft.com/en-us/research/publication/tutorial-on-causal-inference-and-counterfactual-reasoning/) - KDD tutorial with recommender systems, social media, health, education, and governance examples.
+- [Recommendations as Treatments](https://www.microsoft.com/en-us/research/?p=398366) - Schnabel et al. on debiasing learning and evaluation for recommender systems using causal inference ideas.
+- [Estimating the Causal Impact of Recommendation Systems from Observational Data](https://www.microsoft.com/en-us/research/publication/estimating-the-causal-impact-of-recommendation-systems-from-observational-data/) - Sharma, Hofman, and Watts on IV-style identification for recommendation-system effects.
+- [Off-policy evaluation for slate recommendation](https://papers.nips.cc/paper/6954-off-policy-evaluation-for-slate-recommendation) - Logged-policy evaluation for ranked recommendations and ads.
+- [A survey on causal inference for recommendation](https://pmc.ncbi.nlm.nih.gov/articles/PMC10901840/) - Survey of causal recommendation methods and taxonomies.
+- [RecSim NG](https://google-research.github.io/recsim_ng/) - Probabilistic simulator for multi-agent recommender ecosystems and counterfactual policy experimentation.
 
 ## Sensitivity, Robustness, and Diagnostics
 
@@ -249,6 +301,13 @@ Benchmarks are useful for debugging and comparison, not proof that a method iden
 - [ExP Platform papers](https://exp-platform.com/) - Microsoft and industry lessons on sample ratio mismatch, metrics, guardrails, and trustworthy online experiments.
 - [Experiment like Spotify](https://confidence.spotify.com/blog/experiment-like-spotify) - Spotify's public writing on experimentation tooling and practice.
 
+## Healthcare and Policy Case Studies
+
+- [Target Trial Emulation](https://pubmed.ncbi.nlm.nih.gov/36508210/) - Hernan, Wang, and Leaf framework for designing observational studies around the randomized trial one would have liked to run.
+- [Target Trial Emulation to Improve Causal Inference from Observational Data](https://pmc.ncbi.nlm.nih.gov/articles/PMC10400102/) - Practical healthcare-oriented guide to target-trial specification and emulation.
+- [Synthetic Control Methods for Comparative Case Studies](https://www.nber.org/papers/t0335) - California tobacco-control program case study introducing synthetic control for aggregate policy evaluation.
+- [A Causal Roadmap for Generating High-Quality Real-World Evidence](https://www.microsoft.com/en-us/research/?p=941538) - Roadmap for real-world evidence with design, assumptions, and diagnostics.
+
 ## Communities and Related Lists
 
 - [PyWhy](https://www.pywhy.org/) - Community and ecosystem for causal machine learning.
@@ -258,22 +317,6 @@ Benchmarks are useful for debugging and comparison, not proof that a method iden
 - [awesome-causal-inference](https://github.com/matteocourthoud/awesome-causal-inference) - Broad existing awesome list of causal inference resources.
 
 <!--lint disable awesome-list-item-->
-
-## Not Included Yet
-
-These are good contribution targets. They are intentionally listed as gaps, not as endorsed resources:
-
-- CUPAC and newer variance-reduction extensions beyond CUPED.
-- Sequential testing, always-valid inference, alpha spending, and experiment monitoring.
-- Cluster randomized trials and split-plot experiments.
-- Interference, network experiments, marketplace experiments, and spillover-aware designs.
-- Encouragement designs and randomized instruments.
-- Missing data, attrition, censoring, and survivorship problems.
-- Causal inference for recommender systems, ranking, ads, and ML product loops.
-- More healthcare, education, labor, and policy case studies.
-- Reviewer-friendly starter paths for product analysts, economists, ML researchers, and epidemiologists.
-
-See [ROADMAP.md](ROADMAP.md) for the working backlog.
 
 ## Curation Checklist
 
