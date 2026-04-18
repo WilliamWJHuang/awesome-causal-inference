@@ -1,6 +1,5 @@
-# Awesome Causal Inference for Experimentation
+# Awesome Causal Inference for Experimentation [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Link Check](https://github.com/WilliamWJHuang/awesome-causal-inference/actions/workflows/link-check.yml/badge.svg)](https://github.com/WilliamWJHuang/awesome-causal-inference/actions/workflows/link-check.yml)
 [![Awesome Lint](https://github.com/WilliamWJHuang/awesome-causal-inference/actions/workflows/awesome-lint.yml/badge.svg)](https://github.com/WilliamWJHuang/awesome-causal-inference/actions/workflows/awesome-lint.yml)
@@ -9,19 +8,8 @@ A curated list of practical, research-grade resources for causal inference, expe
 
 Causal inference is not a menu of estimators. The best resources here help you define the estimand, state assumptions, defend identification, run or analyze experiments, test robustness, and communicate uncertainty.
 
+<!--lint disable double-link-->
 <!--lint disable awesome-list-item-->
-
-## Scope
-
-This list is meant for people who need to answer questions like:
-
-- Did this product, policy, model, treatment, or intervention cause a change?
-- Can we learn from an A/B test, quasi-experiment, rollout, or observational study?
-- Which assumptions make the estimate credible, and which assumptions are doing too much work?
-- How should we diagnose confounding, selection bias, interference, noncompliance, attrition, metric issues, or treatment heterogeneity?
-- Which software is appropriate for a given design?
-
-This repository deliberately emphasizes experimentation and applied decision-making. There are already strong general causal inference lists, so this one should earn its place by being selective, transparent about assumptions, and useful to practitioners.
 
 ## Contents
 
@@ -52,6 +40,18 @@ This repository deliberately emphasizes experimentation and applied decision-mak
 - [Communities and Related Lists](#communities-and-related-lists)
 - [Curation Checklist](#curation-checklist)
 
+## Scope
+
+This list is meant for people who need to answer questions like:
+
+- Did this product, policy, model, treatment, or intervention cause a change?
+- Can we learn from an A/B test, quasi-experiment, rollout, or observational study?
+- Which assumptions make the estimate credible, and which assumptions are doing too much work?
+- How should we diagnose confounding, selection bias, interference, noncompliance, attrition, metric issues, or treatment heterogeneity?
+- Which software is appropriate for a given design?
+
+This repository deliberately emphasizes experimentation and applied decision-making. There are already strong general causal inference lists, so this one should earn its place by being selective, transparent about assumptions, and useful to practitioners.
+
 ## Start Here
 
 If you are new to the field, start with design before software:
@@ -72,6 +72,8 @@ If you are new to the field, start with design before software:
 
 ## Causal Questions by Design
 
+<!--lint disable table-pipe-alignment-->
+
 | Situation | Natural design family | First resources to check |
 | --- | --- | --- |
 | We randomized users, sessions, markets, or units. | Online experiments, field experiments, A/A tests, guardrails, sequential monitoring. | [Trustworthy Online Controlled Experiments](https://experimentguide.com/), [ExP Platform](https://exp-platform.com/), [Field Experiments](https://wwnorton.com/books/Field-Experiments/), [randomizr](https://declaredesign.org/r/randomizr/), [estimatr](https://declaredesign.org/r/estimatr/) |
@@ -80,6 +82,8 @@ If you are new to the field, start with design before software:
 | We expect effects to vary by user, patient, context, or market. | CATE, uplift modeling, causal forests, policy learning. | [EconML](https://econml.azurewebsites.net/), [CausalML](https://causalml.readthedocs.io/), [grf](https://grf-labs.github.io/grf/), [DoubleML](https://docs.doubleml.org/stable/index.html) |
 | We have time series around an intervention. | Interrupted time series, Bayesian structural time series, synthetic control, causal time-series discovery. | [CausalImpact](https://google.github.io/CausalImpact/CausalImpact.html), [Synth](https://cran.r-project.org/package=Synth), [synthdid](https://synth-inference.github.io/synthdid/), [Tigramite](https://jakobrunge.github.io/tigramite/) |
 | We want to discover candidate causal structure. | Causal discovery, invariance, graphical model search, time-series causal discovery. | [Elements of Causal Inference](https://is.mpg.de/ics/en/publications/petjansch17), [Tetrad](https://www.cmu.edu/dietrich/philosophy/tetrad/), [causal-learn](https://causal-learn.readthedocs.io/en/latest/index.html), [Tigramite](https://jakobrunge.github.io/tigramite/) |
+
+<!--lint enable table-pipe-alignment-->
 
 Design labels are not guarantees. They are starting points for asking whether the assignment mechanism, comparison group, timing, measurements, and assumptions can support the causal claim.
 
