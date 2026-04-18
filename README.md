@@ -13,6 +13,7 @@ Causal inference is not a menu of estimators. The best resources here help you d
 
 ## Contents
 
+- [Scope](#scope)
 - [Start Here](#start-here)
 - [Starter Paths](#starter-paths)
 - [Causal Questions by Design](#causal-questions-by-design)
