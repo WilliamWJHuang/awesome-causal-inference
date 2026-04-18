@@ -1,7 +1,8 @@
-# Awesome Causal Inference & Experimentation
+# Awesome Causal Inference for Experimentation
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Link Check](https://github.com/WilliamWJHuang/awesome-causal-inference/actions/workflows/link-check.yml/badge.svg)](https://github.com/WilliamWJHuang/awesome-causal-inference/actions/workflows/link-check.yml)
 
 A curated list of practical, research-grade resources for causal inference, experimentation, quasi-experiments, uplift modeling, causal machine learning, and decision-making from data.
 
@@ -21,6 +22,9 @@ This repository deliberately emphasizes experimentation and applied decision-mak
 
 ## Contents
 
+- [Start Here](#start-here)
+- [Causal Questions by Design](#causal-questions-by-design)
+- [Common Failure Modes](#common-failure-modes)
 - [Foundations and Books](#foundations-and-books)
 - [Courses and Lecture Notes](#courses-and-lecture-notes)
 - [Causal Diagrams and Identification](#causal-diagrams-and-identification)
@@ -35,6 +39,42 @@ This repository deliberately emphasizes experimentation and applied decision-mak
 - [Industry Case Studies](#industry-case-studies)
 - [Communities and Related Lists](#communities-and-related-lists)
 - [Curation Checklist](#curation-checklist)
+
+## Start Here
+
+If you are new to the field, start with design before software:
+
+- **New to causal inference:** [The Effect](https://theeffectbook.net/), [Causal Inference: What If](https://miguelhernan.org/whatifbook), and [DAGitty](https://www.dagitty.net/).
+- **Product experimentation:** [Trustworthy Online Controlled Experiments](https://experimentguide.com/), [ExP Platform](https://exp-platform.com/), and [GrowthBook](https://docs.growthbook.io/).
+- **Observational product or policy analysis:** [Causal Inference: The Mixtape](https://mixtape.scunning.com/), [MatchIt](https://kosukeimai.github.io/MatchIt/), [WeightIt](https://ngreifer.github.io/WeightIt/), [cobalt](https://ngreifer.github.io/cobalt/), and [did](https://bcallaway11.github.io/did/).
+- **Causal machine learning:** [DoWhy](https://www.pywhy.org/dowhy/), [EconML](https://econml.azurewebsites.net/), [DoubleML](https://docs.doubleml.org/stable/index.html), and [grf](https://grf-labs.github.io/grf/).
+- **Robustness and critique:** [A Crash Course in Good and Bad Controls](https://ftp.iza.org/dp13659.pdf), [sensemakr](https://github.com/carloscinelli/sensemakr), and [DoWhy refuters](https://www.pywhy.org/dowhy/v0.14/user_guide/refuting_causal_estimates/index.html).
+
+## Causal Questions by Design
+
+| Situation | Natural design family | First resources to check |
+| --- | --- | --- |
+| We randomized users, sessions, markets, or units. | Online experiments, field experiments, A/A tests, guardrails, sequential monitoring. | [Trustworthy Online Controlled Experiments](https://experimentguide.com/), [ExP Platform](https://exp-platform.com/), [Field Experiments](https://wwnorton.com/books/Field-Experiments/), [randomizr](https://declaredesign.org/r/randomizr/), [estimatr](https://declaredesign.org/r/estimatr/) |
+| Treatment rolled out by time, geography, eligibility, or policy threshold. | Difference-in-differences, event studies, regression discontinuity, synthetic control. | [Causal Inference: The Mixtape](https://mixtape.scunning.com/), [did](https://bcallaway11.github.io/did/), [fixest](https://lrberge.github.io/fixest/), [rdrobust](https://rdpackages.github.io/rdrobust/), [synthdid](https://synth-inference.github.io/synthdid/) |
+| We only have observational data and treatment was not randomized. | DAGs, matching, weighting, target trial emulation, sensitivity analysis. | [Causal Inference: What If](https://miguelhernan.org/whatifbook), [DAGitty](https://www.dagitty.net/), [MatchIt](https://kosukeimai.github.io/MatchIt/), [WeightIt](https://ngreifer.github.io/WeightIt/), [sensemakr](https://github.com/carloscinelli/sensemakr) |
+| We expect effects to vary by user, patient, context, or market. | CATE, uplift modeling, causal forests, policy learning. | [EconML](https://econml.azurewebsites.net/), [CausalML](https://causalml.readthedocs.io/), [grf](https://grf-labs.github.io/grf/), [DoubleML](https://docs.doubleml.org/stable/index.html) |
+| We have time series around an intervention. | Interrupted time series, Bayesian structural time series, synthetic control, causal time-series discovery. | [CausalImpact](https://google.github.io/CausalImpact/CausalImpact.html), [Synth](https://cran.r-project.org/package=Synth), [synthdid](https://synth-inference.github.io/synthdid/), [Tigramite](https://jakobrunge.github.io/tigramite/) |
+| We want to discover candidate causal structure. | Causal discovery, invariance, graphical model search, time-series causal discovery. | [Elements of Causal Inference](https://mitpress.mit.edu/9780262037310/elements-of-causal-inference/), [Tetrad](https://www.cmu.edu/dietrich/causality/tetrad/), [causal-learn](https://causal-learn.readthedocs.io/en/latest/index.html), [Tigramite](https://jakobrunge.github.io/tigramite/) |
+
+Design labels are not guarantees. They are starting points for asking whether the assignment mechanism, comparison group, timing, measurements, and assumptions can support the causal claim.
+
+## Common Failure Modes
+
+- **Bad controls:** adjusting for colliders, mediators, instruments, or post-treatment variables can create bias or change the estimand.
+- **Confounding disguised as prediction:** high predictive accuracy does not identify a causal effect.
+- **Sample ratio mismatch:** experiment traffic counts do not match the planned allocation, often signaling logging, targeting, or assignment problems.
+- **Interference and spillovers:** one unit's treatment affects another unit's outcome, violating simple independent-treatment assumptions.
+- **Noncompliance and exposure mismatch:** assigned treatment differs from received or noticed treatment.
+- **Attrition and missingness:** outcome availability depends on treatment, engagement, survival, or follow-up.
+- **Peeking and sequential testing:** repeated looks at noisy metrics inflate false positives unless the design accounts for them.
+- **Metric validity problems:** the measured metric is not the decision-relevant outcome, or it can be gamed by the intervention.
+- **Positivity violations:** some units have no realistic chance of receiving each treatment condition, making comparisons extrapolative.
+- **Heterogeneous effects hidden by averages:** a positive average treatment effect may mask harmed subgroups or operationally important variation.
 
 ## Foundations and Books
 
