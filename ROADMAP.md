@@ -5,19 +5,22 @@ This roadmap keeps future additions focused on causal inference for experimentat
 ## Seeded, But Worth Deepening
 
 - Variance reduction in online experiments, including CUPED, CUPAC, CUPAC-like prediction covariates, and regression adjustment.
-- Sequential testing, alpha spending, always-valid inference, and experiment monitoring.
+- Sequential testing, alpha spending, always-valid inference, online FDR, and experiment monitoring.
+- Experiment health checks, including SRM, A/A tests, guardrail metrics, triggering, exposure logging, metric denominator checks, and launch-decision review.
 - Cluster-randomized, geo, marketplace, and split-plot experiment designs.
-- Interference, spillovers, network experiments, and marketplace feedback loops.
-- Missing data, attrition, censoring, and survivorship-bias resources.
-- Starter paths for product analysts, economists, ML researchers, epidemiologists, and experiment platform builders.
+- Interference, spillovers, network experiments, marketplace feedback loops, and two-sided-platform measurement.
+- Classical econometrics, including RDD, event studies, IV/LATE, synthetic control, and staggered DiD diagnostics.
+- Target-trial emulation and observational-design resources outside healthcare.
+- Missing data, attrition, censoring, Lee bounds, IPCW, principal stratification, and MNAR sensitivity analysis.
+- Recommender systems, ranking, ads, logged-policy evaluation, exposure propensities, delayed feedback, and long-horizon product loops.
 
 ## Medium Term
 
-- Add deeper causal inference resources for recommender systems, ranking, ads, and ML product loops.
-- Add more education, labor, and public-policy case studies.
+- Add more education, labor, healthcare, and public-policy case studies.
 - Add resources on transportability, external validity, and treatment-effect generalization.
-- Add practical examples of sensitivity analysis and negative-control workflows.
-- Add resources on experiment platform governance, metric review, and launch decision processes.
+- Add practical examples of sensitivity analysis, negative-control workflows, and placebo tests.
+- Add more experiment platform governance resources, including instrumentation reviews and pre-launch analysis checklists.
+- Add short example notebooks only when they clarify design assumptions rather than just demonstrating an estimator API.
 
 ## Maintenance
 

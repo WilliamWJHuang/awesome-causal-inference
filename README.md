@@ -27,9 +27,11 @@ Causal inference is not a menu of estimators. The useful work is in naming the e
 - [Courses and Lecture Notes](#courses-and-lecture-notes)
 - [Causal Diagrams and Identification](#causal-diagrams-and-identification)
 - [Randomized Experiments and A/B Testing](#randomized-experiments-and-ab-testing)
+- [Experiment Health, Guardrails, and SRM](#experiment-health-guardrails-and-srm)
 - [Variance Reduction and Sequential Testing](#variance-reduction-and-sequential-testing)
 - [Cluster, Network, and Marketplace Experiments](#cluster-network-and-marketplace-experiments)
 - [Quasi-Experiments and Observational Designs](#quasi-experiments-and-observational-designs)
+- [Target Trials and Observational Design](#target-trials-and-observational-design)
 - [Instrumental Variables and Encouragement Designs](#instrumental-variables-and-encouragement-designs)
 - [Missing Data, Attrition, and Censoring](#missing-data-attrition-and-censoring)
 - [Heterogeneous Effects, Uplift, and Policy Learning](#heterogeneous-effects-uplift-and-policy-learning)
@@ -130,7 +132,8 @@ Before trusting a causal estimate, ask:
 
 ## Common Failure Modes
 
-- **Bad controls:** adjusting for colliders, mediators, instruments, or post-treatment variables can create bias or change the estimand.
+- **Post-treatment and collider adjustment:** conditioning on variables affected by treatment, or common effects of treatment and outcome causes, can create bias or change the estimand.
+- **Control variables used without a design:** adding instruments, proxies, or high-dimensional predictors may improve fit while worsening precision, overlap, or interpretability.
 - **Prediction mistaken for identification:** high predictive accuracy does not identify a causal effect.
 - **Sample ratio mismatch:** experiment traffic counts do not match the planned allocation, often signaling logging, targeting, or assignment problems.
 - **Interference and spillovers:** one unit's treatment affects another unit's outcome, violating simple independent-treatment assumptions.
@@ -152,7 +155,7 @@ These are not banned sentences; they are prompts to ask for the design that woul
 - **"Randomization means we do not need diagnostics."** Randomization protects the design only if assignment, exposure, logging, and analysis followed the plan.
 - **"The average effect is positive, so the intervention is safe."** Check harms, heterogeneous effects, guardrails, and whether the treated population changed.
 - **"The instrument affects treatment, so IV is valid."** Relevance is only one condition; exclusion and independence usually carry the argument.
-- **"CUPED/CUPAC found significance, so the product effect is real."** Variance reduction should use pre-treatment covariates and must not change the estimand.
+- **"CUPED/CUPAC found significance, so the product effect is real."** Variance reduction can improve precision; it does not fix bad assignment, biased logging, or post-treatment adjustment.
 - **"No pre-trend difference means DiD is proven."** Pre-trends are a diagnostic, not a proof of the untreated counterfactual.
 - **"This benchmark shows the method works."** Benchmarks test behavior under their own data-generating process; your study still needs identification.
 
@@ -166,7 +169,7 @@ These are not banned sentences; they are prompts to ask for the design that woul
 - **Synthetic control:** depends on donor-pool quality, pre-treatment fit, and no spillovers from treated to control units.
 - **Causal forests and CATE models:** estimate heterogeneity after a causal design is credible; they do not create identification by themselves.
 - **Double/debiased ML:** helps with nuisance estimation under assumptions; it does not rescue a poorly defined estimand or confounded assignment.
-- **CUPED and covariate adjustment:** can reduce variance in randomized experiments when covariates are pre-treatment and predictive; post-treatment covariates can bias the result.
+- **CUPED and covariate adjustment:** can reduce variance in randomized experiments when covariates are pre-treatment and predictive; they change precision, not identification.
 
 <!--lint enable awesome-list-item-->
 
@@ -178,10 +181,18 @@ Start here when you need the canonical reference behind a method. Read these as 
 - [CUPED](https://exp-platform.com/cuped/) - Deng, Xu, Kohavi, and Walker on using pre-experiment data to reduce variance in online controlled experiments. `core paper`.
 - [Leveraging covariate adjustments at scale in online A/B testing](https://proceedings.mlr.press/v218/masoero23a.html) - Masoero, Hains, and McQueen on scalable covariate adjustment for online experiments. `core paper`.
 - [Always Valid Inference: Bringing Sequential Analysis to A/B Testing](https://arxiv.org/abs/1512.04922) - Johari, Pekelis, and Walsh on continuous monitoring and always-valid p-values. `core paper`.
+- [Design and analysis of group sequential tests based on the type I error spending rate function](https://academic.oup.com/biomet/article/74/1/149/217232) - Kim and DeMets on alpha-spending boundaries for interim monitoring. `core paper`.
 - [Difference-in-Differences with Multiple Time Periods](https://arxiv.org/abs/1803.09015) - Callaway and Sant'Anna on staggered DiD, group-time effects, covariates, and doubly robust estimation. `core paper`.
 - [Difference-in-Differences with Variation in Treatment Timing](https://www.nber.org/papers/w25018) - Goodman-Bacon on what two-way fixed effects average when treatment timing varies. `core paper`.
+- [Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects](https://arxiv.org/abs/1804.05785) - Sun and Abraham on contamination in two-way fixed-effects event-study coefficients. `core paper`.
+- [Revisiting Event Study Designs: Robust and Efficient Estimation](https://arxiv.org/abs/2108.12419) - Borusyak, Jaravel, and Spiess on imputation-style event-study estimation with heterogeneous effects. `core paper`.
+- [Regression Discontinuity Designs: A Guide to Practice](https://www.nber.org/papers/w13039) - Imbens and Lemieux on practical and theoretical issues in RD implementation. `core paper`.
+- [Regression Discontinuity Designs in Economics](https://www.nber.org/papers/w14723) - Lee and Lemieux's applied user guide to RD validity, estimation, and interpretation. `core paper`.
 - [Synthetic Control Methods for Comparative Case Studies](https://www.nber.org/papers/t0335) - Abadie, Diamond, and Hainmueller on synthetic control for aggregate policy evaluation. `core paper`.
 - [Identification of Causal Effects Using Instrumental Variables](https://www.nber.org/papers/t0136) - Angrist, Imbens, and Rubin on IV identification and local average treatment effects. `core paper`.
+- [Using Big Data to Emulate a Target Trial When a Randomized Trial Is Not Available](https://pmc.ncbi.nlm.nih.gov/articles/PMC4832051/) - Hernan and Robins on specifying the trial protocol before analyzing observational data. `core paper`.
+- [Trimming for Bounds on Treatment Effects with Missing Outcomes](https://www.nber.org/papers/t0277) - Lee on bounding treatment effects under missing outcomes and monotonic selection. `core paper`.
+- [Principal Stratification in Causal Inference](https://pubmed.ncbi.nlm.nih.gov/11890317/) - Frangakis and Rubin on causal effects within strata defined by post-treatment variables. `core paper`.
 - [Single World Intervention Graphs: A Primer](https://arxiv.org/abs/1301.3908) - Richardson and Robins on graphical representations of counterfactual causal models. `core paper`.
 - [A Crash Course in Good and Bad Controls](https://ftp.iza.org/dp13659.pdf) - Cinelli, Forney, and Pearl on when controls help, hurt, or change the estimand. `core paper` `diagnostics`.
 - [Generalized Random Forests](https://projecteuclid.org/journals/annals-of-statistics/volume-47/issue-2/Generalized-random-forests/10.1214/18-AOS1709.full) - Athey, Tibshirani, and Wager on forests for heterogeneous effects and related estimands. `core paper`.
@@ -235,6 +246,19 @@ Start here when you need the canonical reference behind a method. Read these as 
 - [randomizr](https://declaredesign.org/r/randomizr/) - R package for random assignment procedures.
 - [estimatr](https://declaredesign.org/r/estimatr/) - R package for design-based estimators with robust and clustered standard errors.
 
+## Experiment Health, Guardrails, and SRM
+
+Do not analyze experiment effects until the experiment itself looks healthy. SRM, broken triggering, exposure leakage, denominator shifts, metric bugs, and skipped guardrails can flip the sign of a result.
+
+- [Diagnosing Sample Ratio Mismatch in Online Controlled Experiments](https://www.microsoft.com/en-us/research/publication/diagnosing-sample-ratio-mismatch-in-online-controlled-experiments-a-taxonomy-and-rules-of-thumb-for-practitioners/) - Fabijan et al. taxonomy and rules of thumb for finding SRM root causes. `diagnostics`.
+- [Diagnosing Sample Ratio Mismatch in A/B Testing](https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/) - Microsoft ExP walkthrough of why SRM can invalidate product conclusions. `first read` `diagnostics`.
+- [Three Key Checklists and Remedies for Trustworthy Analysis of Online Controlled Experiments at Scale](https://www.microsoft.com/en-us/research/publication/three-key-checklists-and-remedies-for-trustworthy-analysis-of-online-controlled-experiments-at-scale/) - Checklists for setup, analysis, and decision review in large-scale experimentation. `diagnostics`.
+- [A Dirty Dozen: Twelve Common Metric Interpretation Pitfalls in Online Controlled Experiments](https://www.microsoft.com/en-us/research/publication/a-dirty-dozen-twelve-common-metric-interpretation-pitfalls-in-online-controlled-experiments/) - Examples of metric denominator shifts, ratio traps, and misleading movements. `diagnostics`.
+- [p-Values for Your p-Values](https://www.microsoft.com/en-us/research/articles/p-values-for-your-p-values-validating-metric-trustworthiness-by-simulated-a-a-tests/) - Simulated A/A tests for validating metric and testing-system behavior. `diagnostics`.
+- [The Anatomy of a Large-Scale Experimentation Platform](https://www.microsoft.com/en-us/research/publication/the-anatomy-of-a-large-scale-experimentation-platform/) - Platform architecture for assignment, logging, analysis, and trustworthiness at scale. `case study`.
+- [Safe Velocity](https://www.microsoft.com/en-us/research/publication/safe-velocity-a-practical-guide-to-software-deployment-at-scale-using-controlled-rollout/) - Controlled rollout as a bridge between deployment safety and experiment learning. `case study`.
+- [Top Challenges from the first Practical Online Controlled Experiments Summit](https://www.microsoft.com/en-us/research/publication/top-challenges-from-the-first-practical-online-controlled-experiments-summit/) - Cross-company summary of operating challenges in experimentation programs. `case study`.
+
 ## Variance Reduction and Sequential Testing
 
 - [CUPED](https://exp-platform.com/cuped/) - Deng, Xu, Kohavi, and Walker paper on using pre-experiment data to reduce variance in online controlled experiments. `core paper`.
@@ -243,6 +267,7 @@ Start here when you need the canonical reference behind a method. Read these as 
 - [Improving Experimental Power through CUPAC](https://careersatdoordash.com/blog/improving-experimental-power-through-control-using-predictions-as-covariate-cupac/) - DoorDash article on using ML predictions as covariates in switchback and online experiments. `case study`.
 - [Meet Dash-AB](https://careersatdoordash.com/blog/meet-dash-ab-the-statistics-engine-of-experimentation-at-doordash/) - DoorDash's experimentation statistics engine, including CUPED, CUPAC, fixed-horizon tests, and sequential tests. `case study`.
 - [Always Valid Inference: Bringing Sequential Analysis to A/B Testing](https://arxiv.org/abs/1512.04922) - Johari, Pekelis, and Walsh on continuous monitoring and always-valid p-values for A/B tests. `core paper`.
+- [Design and analysis of group sequential tests based on the type I error spending rate function](https://academic.oup.com/biomet/article/74/1/149/217232) - Kim and DeMets on alpha-spending boundaries for interim looks. `core paper`.
 - [Online multiple hypothesis testing](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615519/) - Survey of online false discovery rate control and sequential testing ideas.
 - [Covariate adjustment and CUPED methodology](https://launchdarkly.com/docs/guides/statistical-methodology/cuped) - Practical documentation on CUPED, ANCOVA-style adjustment, pre-treatment covariates, and implementation caveats. `first read`.
 
@@ -257,6 +282,10 @@ Start here when you need the canonical reference behind a method. Read these as 
 
 - [Difference-in-Differences with Multiple Time Periods](https://arxiv.org/abs/1803.09015) - Callaway and Sant'Anna paper behind modern staggered DiD estimands and doubly robust estimation. `core paper`.
 - [Difference-in-Differences with Variation in Treatment Timing](https://www.nber.org/papers/w25018) - Goodman-Bacon decomposition of two-way fixed effects with staggered adoption. `core paper`.
+- [Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects](https://arxiv.org/abs/1804.05785) - Sun and Abraham on why conventional event-study leads and lags can be contaminated under heterogeneous effects. `core paper`.
+- [Revisiting Event Study Designs: Robust and Efficient Estimation](https://arxiv.org/abs/2108.12419) - Borusyak, Jaravel, and Spiess on imputation estimators and tests for event-study identifying assumptions. `core paper`.
+- [Regression Discontinuity Designs: A Guide to Practice](https://www.nber.org/papers/w13039) - Imbens and Lemieux on RD implementation, bandwidths, and interpretation. `core paper`.
+- [Regression Discontinuity Designs in Economics](https://www.nber.org/papers/w14723) - Lee and Lemieux's broader user guide to RD validity and design logic. `core paper`.
 - [did](https://bcallaway11.github.io/did/) - R package for modern difference-in-differences with multiple periods and staggered treatment timing. `software`.
 - [fixest](https://lrberge.github.io/fixest/) - Fast fixed-effects estimation in R, including event-study and DiD workflows. `software`.
 - [rdrobust](https://rdpackages.github.io/rdrobust/) - Robust inference, bandwidth selection, and plots for regression discontinuity designs. `software`.
@@ -267,6 +296,17 @@ Start here when you need the canonical reference behind a method. Read these as 
 - [WeightIt](https://ngreifer.github.io/WeightIt/) - R package for balancing weights across binary, multi-category, continuous, and longitudinal treatments. `software`.
 - [cobalt](https://ngreifer.github.io/cobalt/) - Covariate balance diagnostics and Love plots for matching and weighting workflows. `software` `diagnostics`.
 
+## Target Trials and Observational Design
+
+When treatment is self-selected, first write the protocol for the randomized trial you wish you could run. Eligibility, time zero, treatment strategies, follow-up, outcomes, and causal contrasts should be explicit before choosing matching, weighting, regression, or ML.
+
+- [Using Big Data to Emulate a Target Trial When a Randomized Trial Is Not Available](https://pmc.ncbi.nlm.nih.gov/articles/PMC4832051/) - Hernan and Robins on making the target trial explicit in observational databases. `core paper`.
+- [Target Trial Emulation](https://pubmed.ncbi.nlm.nih.gov/36508210/) - Hernan, Wang, and Leaf guide to target-trial emulation as a framework for observational causal inference. `first read`.
+- [Target Trial Emulation to Improve Causal Inference from Observational Data](https://pmc.ncbi.nlm.nih.gov/articles/PMC10400102/) - Practical guide to specifying and emulating target trials in healthcare data. `first read`.
+- [Causal inference from observational data and target trial emulation](https://pubmed.ncbi.nlm.nih.gov/36063988/) - Short applied discussion of target-trial thinking for observational studies. `first read`.
+- [Causal Inference: What If](https://miguelhernan.org/whatifbook) - Book-length treatment of target trials, longitudinal strategies, exchangeability, positivity, and consistency. `core reference`.
+- [DAGitty](https://www.dagitty.net/) - Draw assumptions before choosing adjustment sets for observational analyses. `software` `diagnostics`.
+
 ## Instrumental Variables and Encouragement Designs
 
 - [Identification of Causal Effects Using Instrumental Variables](https://www.nber.org/papers/t0136) - Angrist, Imbens, and Rubin paper on IV identification and local average treatment effects. `core paper`.
@@ -276,7 +316,13 @@ Start here when you need the canonical reference behind a method. Read these as 
 
 ## Missing Data, Attrition, and Censoring
 
+Missing outcomes are not just smaller samples. Ask whether missingness is pre-treatment, post-treatment, outcome-dependent, or caused by survival/engagement before treating complete cases as the analysis population.
+
 - [Addressing missing data in randomized clinical trials](https://journals.plos.org/plosone/doi?id=10.1371/journal.pone.0234349) - Causal-inference perspective on MCAR, MAR, MNAR, selective attrition, and Lee-bound-style approaches. `first read`.
+- [Analysis of Semiparametric Regression Models for Repeated Outcomes in the Presence of Missing Data](https://www.tandfonline.com/doi/abs/10.1080/01621459.1995.10476493) - Robins, Rotnitzky, and Zhao paper introducing inverse-probability-of-censoring weighted estimators. `core paper`.
+- [Trimming for Bounds on Treatment Effects with Missing Outcomes](https://www.nber.org/papers/t0277) - Lee bounds for treatment effects when outcomes are missing under monotonic selection. `core paper`.
+- [Principal Stratification in Causal Inference](https://pubmed.ncbi.nlm.nih.gov/11890317/) - Frangakis and Rubin on causal effects defined by joint potential values of post-treatment variables. `core paper`.
+- [Adjusting for Nonignorable Drop-Out Using Semiparametric Nonresponse Models](https://www.tandfonline.com/doi/abs/10.1080/01621459.1999.10473862) - Scharfstein, Rotnitzky, and Robins on sensitivity analysis for nonignorable dropout. `advanced`.
 - [Causal Inference With Outcome-Dependent Missingness And Self-Censoring](https://pmc.ncbi.nlm.nih.gov/articles/PMC11905187/) - Work on causal identification when missingness depends on outcomes or self-censoring.
 - [Causal Inference with Corrupted Data](https://www.nber.org/books-and-chapters/data-privacy-protection-and-conduct-applied-research-methods-approaches-and-their-consequences/causal-inference-corrupted-data-measurement-error-missing-values-discretization-and-differential) - NBER chapter on measurement error, missing values, discretization, and privacy transformations.
 
@@ -292,11 +338,16 @@ Start here when you need the canonical reference behind a method. Read these as 
 
 ## Recommender Systems, Ads, and ML Product Loops
 
+Offline evaluation is not proof of live causal impact. Logged policies, exposure propensities, delayed feedback, slate position, retraining loops, and long-horizon user behavior are part of the causal design.
+
 - [Tutorial on Causal Inference and Counterfactual Reasoning](https://www.microsoft.com/en-us/research/publication/tutorial-on-causal-inference-and-counterfactual-reasoning/) - KDD tutorial with recommender systems, social media, health, education, and governance examples.
 - [Recommendations as Treatments](https://www.microsoft.com/en-us/research/?p=398366) - Schnabel et al. on debiasing learning and evaluation for recommender systems using causal inference ideas. `core paper`.
 - [Estimating the Causal Impact of Recommendation Systems from Observational Data](https://www.microsoft.com/en-us/research/publication/estimating-the-causal-impact-of-recommendation-systems-from-observational-data/) - Sharma, Hofman, and Watts on IV-style identification for recommendation-system effects. `core paper`.
+- [Unbiased Offline Evaluation of Contextual-bandit-based News Article Recommendation Algorithms](https://arxiv.org/abs/1003.5956) - Li, Chu, Langford, and Wang on replay evaluation with random logged traffic. `core paper`.
+- [Counterfactual Evaluation and Learning for Search, Recommendation and Ad Placement](https://www.cs.cornell.edu/~adith/CfactSIGIR2016/) - Joachims and Swaminathan tutorial on logged feedback, propensities, and counterfactual learning. `first read`.
 - [Off-policy evaluation for slate recommendation](https://papers.nips.cc/paper/6954-off-policy-evaluation-for-slate-recommendation) - Logged-policy evaluation for ranked recommendations and ads. `core paper`.
 - [A survey on causal inference for recommendation](https://pmc.ncbi.nlm.nih.gov/articles/PMC10901840/) - Survey of causal recommendation methods and taxonomies. `first read`.
+- [Breaking Feedback Loops in Recommender Systems with Causal Inference](https://arxiv.org/abs/2207.01616) - Krauth, Wang, and Jordan on recommender feedback loops and causal adjustment. `core paper`.
 - [RecSim NG](https://google-research.github.io/recsim_ng/) - Probabilistic simulator for multi-agent recommender ecosystems and counterfactual policy experimentation. `software`.
 
 ## Sensitivity, Robustness, and Diagnostics
