@@ -181,7 +181,7 @@ Start here when you need the canonical reference behind a method. Read these as 
 - [CUPED](https://exp-platform.com/cuped/) - Deng, Xu, Kohavi, and Walker on using pre-experiment data to reduce variance in online controlled experiments. `core paper`.
 - [Leveraging covariate adjustments at scale in online A/B testing](https://proceedings.mlr.press/v218/masoero23a.html) - Masoero, Hains, and McQueen on scalable covariate adjustment for online experiments. `core paper`.
 - [Always Valid Inference: Bringing Sequential Analysis to A/B Testing](https://arxiv.org/abs/1512.04922) - Johari, Pekelis, and Walsh on continuous monitoring and always-valid p-values. `core paper`.
-- [Design and analysis of group sequential tests based on the type I error spending rate function](https://academic.oup.com/biomet/article/74/1/149/217232) - Kim and DeMets on alpha-spending boundaries for interim monitoring. `core paper`.
+- [Design and analysis of group sequential tests based on the type I error spending rate function](https://cir.nii.ac.jp/crid/1360574093923261312) - Kim and DeMets on alpha-spending boundaries for interim monitoring. `core paper`.
 - [Difference-in-Differences with Multiple Time Periods](https://arxiv.org/abs/1803.09015) - Callaway and Sant'Anna on staggered DiD, group-time effects, covariates, and doubly robust estimation. `core paper`.
 - [Difference-in-Differences with Variation in Treatment Timing](https://www.nber.org/papers/w25018) - Goodman-Bacon on what two-way fixed effects average when treatment timing varies. `core paper`.
 - [Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects](https://arxiv.org/abs/1804.05785) - Sun and Abraham on contamination in two-way fixed-effects event-study coefficients. `core paper`.
@@ -267,7 +267,7 @@ Do not analyze experiment effects until the experiment itself looks healthy. SRM
 - [Improving Experimental Power through CUPAC](https://careersatdoordash.com/blog/improving-experimental-power-through-control-using-predictions-as-covariate-cupac/) - DoorDash article on using ML predictions as covariates in switchback and online experiments. `case study`.
 - [Meet Dash-AB](https://careersatdoordash.com/blog/meet-dash-ab-the-statistics-engine-of-experimentation-at-doordash/) - DoorDash's experimentation statistics engine, including CUPED, CUPAC, fixed-horizon tests, and sequential tests. `case study`.
 - [Always Valid Inference: Bringing Sequential Analysis to A/B Testing](https://arxiv.org/abs/1512.04922) - Johari, Pekelis, and Walsh on continuous monitoring and always-valid p-values for A/B tests. `core paper`.
-- [Design and analysis of group sequential tests based on the type I error spending rate function](https://academic.oup.com/biomet/article/74/1/149/217232) - Kim and DeMets on alpha-spending boundaries for interim looks. `core paper`.
+- [Design and analysis of group sequential tests based on the type I error spending rate function](https://cir.nii.ac.jp/crid/1360574093923261312) - Kim and DeMets on alpha-spending boundaries for interim looks. `core paper`.
 - [Online multiple hypothesis testing](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615519/) - Survey of online false discovery rate control and sequential testing ideas.
 - [Covariate adjustment and CUPED methodology](https://launchdarkly.com/docs/guides/statistical-methodology/cuped) - Practical documentation on CUPED, ANCOVA-style adjustment, pre-treatment covariates, and implementation caveats. `first read`.
 
@@ -319,10 +319,10 @@ When treatment is self-selected, first write the protocol for the randomized tri
 Missing outcomes are not just smaller samples. Ask whether missingness is pre-treatment, post-treatment, outcome-dependent, or caused by survival/engagement before treating complete cases as the analysis population.
 
 - [Addressing missing data in randomized clinical trials](https://journals.plos.org/plosone/doi?id=10.1371/journal.pone.0234349) - Causal-inference perspective on MCAR, MAR, MNAR, selective attrition, and Lee-bound-style approaches. `first read`.
-- [Analysis of Semiparametric Regression Models for Repeated Outcomes in the Presence of Missing Data](https://www.tandfonline.com/doi/abs/10.1080/01621459.1995.10476493) - Robins, Rotnitzky, and Zhao paper introducing inverse-probability-of-censoring weighted estimators. `core paper`.
+- [Analysis of Semiparametric Regression Models for Repeated Outcomes in the Presence of Missing Data](https://cir.nii.ac.jp/crid/1361137044262135936) - Robins, Rotnitzky, and Zhao paper introducing inverse-probability-of-censoring weighted estimators. `core paper`.
 - [Trimming for Bounds on Treatment Effects with Missing Outcomes](https://www.nber.org/papers/t0277) - Lee bounds for treatment effects when outcomes are missing under monotonic selection. `core paper`.
 - [Principal Stratification in Causal Inference](https://pubmed.ncbi.nlm.nih.gov/11890317/) - Frangakis and Rubin on causal effects defined by joint potential values of post-treatment variables. `core paper`.
-- [Adjusting for Nonignorable Drop-Out Using Semiparametric Nonresponse Models](https://www.tandfonline.com/doi/abs/10.1080/01621459.1999.10473862) - Scharfstein, Rotnitzky, and Robins on sensitivity analysis for nonignorable dropout. `advanced`.
+- [Adjusting for Nonignorable Drop-Out Using Semiparametric Nonresponse Models](https://cir.nii.ac.jp/crid/1360576122324029056) - Scharfstein, Rotnitzky, and Robins on sensitivity analysis for nonignorable dropout. `advanced`.
 - [Causal Inference With Outcome-Dependent Missingness And Self-Censoring](https://pmc.ncbi.nlm.nih.gov/articles/PMC11905187/) - Work on causal identification when missingness depends on outcomes or self-censoring.
 - [Causal Inference with Corrupted Data](https://www.nber.org/books-and-chapters/data-privacy-protection-and-conduct-applied-research-methods-approaches-and-their-consequences/causal-inference-corrupted-data-measurement-error-missing-values-discretization-and-differential) - NBER chapter on measurement error, missing values, discretization, and privacy transformations.
 
