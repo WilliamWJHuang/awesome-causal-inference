@@ -19,7 +19,13 @@ Where should it go in the README?
 
 What causal question, design issue, method, diagnostic, or assumption does it help with?
 
+## Design Fit
+
+- Design or estimand:
+- Key assumptions:
+- Diagnostics, robustness checks, or failure modes:
+- Nearby listed resources it complements or improves on:
+
 ## Caveats
 
 Is it experimental, unmaintained, narrow in scope, vendor-authored, or easy to misuse?
-

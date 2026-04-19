@@ -449,6 +449,8 @@ Before adding a resource, ask:
 
 Prefer official docs, open course pages, peer-reviewed papers, maintained packages, and technically detailed industry writeups. Avoid thin vendor pages, generic SEO content, and resources that imply causal validity without discussing assumptions.
 
+For pull requests and resource suggestions, use the review rubric in [REVIEWING.md](REVIEWING.md).
+
 ## Contributing
 
 Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
